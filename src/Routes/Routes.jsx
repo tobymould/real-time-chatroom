@@ -5,16 +5,17 @@ import firebase, { firestore, provider } from '../firebase';
 import GeneralChatroom from '../components/GeneralChatroom';
 import Navbar from '../components/Navbar';
 import SoftwareChatroom from '../components/SoftwareChatroom';
+import MessageTile from '../components/MessageTile';
 
 export default class Routes extends Component {
-  state = { user: null, chatroomGeneral: null, chatroomSoftware: null };
+  state = { user: null, messageSubmit: null, message: null, chatroomGeneral: null, chatroomSoftware: null };
 
   componentDidMount() {
     this.getUser();
     this.getDataFromFirebase();
   }
 
-  // AUTHENTICATION METHODS
+  // AUTHENTICATION METHODS:
   getUser = () => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -43,28 +44,34 @@ export default class Routes extends Component {
     }
   };
 
-  // FIRESTORE METHODS - CRUD
+  // FIRESTORE METHODS - CRUD:
   getDataFromFirebase = async () => {
-    const collectionGeneral = firestore.collection('general');
+    const collectionGeneral = firestore.collection('generalChatroom');
     const snapshotGeneral = await collectionGeneral.get();
     let dataArray = [];
     snapshotGeneral.forEach(doc => {
-      const hello = doc.id;
-      dataArray.push({
-        [hello]: doc.data()
-      });
+      const messageID = doc.id;
+      dataArray.push([messageID, doc.data()]);
     });
-
     console.log(dataArray);
-
     this.setState({ chatroomGeneral: dataArray });
   };
 
-  addDataToFirebase = something => {
+  addDataToFirebase = event => {
+    event.preventDefault();
+    const { user, message } = this.state;
+    const instantiateTime = new Date();
+    const now = JSON.stringify(instantiateTime).slice(0, -6).slice(1).split('T').join('_');
+    const createdAt = firebase.firestore.Timestamp.fromDate(instantiateTime);
+    const userEmail = user.email;
+    const userName = user.displayName;
+    const submission = { userEmail: userEmail, userName: userName, message: message, createdAt: createdAt };
+    console.log(submission);
+
     firestore
-      .collection('chatrooms')
-      .doc('Toby')
-      .set(something)
+      .collection('generalChatroom')
+      .doc(now + userEmail)
+      .set(submission)
       .then(snapshot => {})
       .catch(error => {});
   };
@@ -87,10 +94,33 @@ export default class Routes extends Component {
       .catch(error => {});
   };
 
+  // OTHER METHODS:
+  inputMessageTiles = () => {
+    const { chatroomGeneral } = this.state;
+
+    if (chatroomGeneral) {
+      return chatroomGeneral.map((tileInfo, index) => {
+        const id = tileInfo[0];
+        const name = tileInfo[1].name;
+        const message = tileInfo[1].message;
+        // const timeStamp = tileInfo[1].created_at.seconds / 60 / 60 / 24 / 7 / 12 / 10;
+
+        return <MessageTile id={id} name={name} message={message} key={index} />;
+      });
+    } else {
+      return null;
+    }
+  };
+
+  messageStateToggle = event => {
+    this.setState({ message: event.target.value });
+  };
+
   render() {
-    const { user } = this.state;
+    const { user, message } = this.state;
     const { signIn, signOut, signInOutJsx } = this;
     const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase } = this;
+    const { inputMessageTiles, messageStateToggle } = this;
 
     return (
       <>
@@ -99,9 +129,9 @@ export default class Routes extends Component {
         <Navbar signIn={signIn} signOut={signOut} signInOutJsx={signInOutJsx} />
 
         <Router>
-          <GeneralChatroom path="/" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} />
+          <GeneralChatroom path="/" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} message={message} messageStateToggle={messageStateToggle} />
 
-          <SoftwareChatroom path="software" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} />
+          <SoftwareChatroom path="software" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} />
         </Router>
       </>
     );
