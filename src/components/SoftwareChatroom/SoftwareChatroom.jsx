@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import styles from './Home.module.scss';
+import styles from './SoftwareChatroom.module.scss';
 import MessageTile from '../MessageTile';
 
-export default class Home extends Component {
+export default class SoftwareChatroom extends Component {
   render() {
     return (
       <div className={styles.homeWrapper}>
-        <h2>#GENERAL CHATROOM</h2>
+        <h2>#SOFTWARE CHATROOM</h2>
         <div className={styles.messageBoard}>
           <MessageTile />
           <MessageTile />
