@@ -18,13 +18,6 @@ export default class GeneralChatroom extends Component {
             <input type="submit" value="send" />
           </label>
         </form>
-        {/* <form onSubmit={addDataToFirebase}></form>
-          <label>
-            <p>Update Display Name:</p>
-            <input type="text" placeholder="Update display name..." />
-            <input type="submit" value="update" />
-          </label>
-        </form> */}
       </div>
     );
   }

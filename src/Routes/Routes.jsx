@@ -101,15 +101,14 @@ export default class Routes extends Component {
     const { chatroomGeneral } = this.state;
     const { user } = this.state;
 
-    if (chatroomGeneral) {
+    if (chatroomGeneral && user) {
       return chatroomGeneral.map((tileInfo, index) => {
-        const id = tileInfo[0];
-        const name = tileInfo[1].name;
+        const name = tileInfo[1].userName;
         const message = tileInfo[1].message;
 
         // const timeStamp = tileInfo[1].created_at.seconds / 60 / 60 / 24 / 7 / 12 / 10;
 
-        return <MessageTile id={id} name={name} message={message} photo={user.photoURL} key={index} />;
+        return <MessageTile name={name} message={message} photo={user ? user.photoURL : null} key={index} />;
       });
     } else {
       return null;
