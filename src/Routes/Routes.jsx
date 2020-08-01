@@ -74,6 +74,8 @@ export default class Routes extends Component {
       .set(submission)
       .then(snapshot => {})
       .catch(error => {});
+
+    this.getDataFromFirebase();
   };
 
   updateDataOnFirebase = something => {
@@ -97,15 +99,17 @@ export default class Routes extends Component {
   // OTHER METHODS:
   inputMessageTiles = () => {
     const { chatroomGeneral } = this.state;
+    const { user } = this.state;
 
     if (chatroomGeneral) {
       return chatroomGeneral.map((tileInfo, index) => {
         const id = tileInfo[0];
         const name = tileInfo[1].name;
         const message = tileInfo[1].message;
+
         // const timeStamp = tileInfo[1].created_at.seconds / 60 / 60 / 24 / 7 / 12 / 10;
 
-        return <MessageTile id={id} name={name} message={message} key={index} />;
+        return <MessageTile id={id} name={name} message={message} photo={user.photoURL} key={index} />;
       });
     } else {
       return null;
