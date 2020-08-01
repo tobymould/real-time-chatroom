@@ -1,0 +1,13 @@
+@import '../../sass/variables';
+
+.messageTileWrapper {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  background: blue;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 5px 0;
+  // justify-content: center;
+}

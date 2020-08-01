@@ -1,0 +1,66 @@
+@import '../../sass/variables';
+
+.homeWrapper {
+  // width: 100vw;
+  margin: 0 5vw;
+  // height: 100vh;
+  background: blue;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // background: red;
+
+  .messageBoard {
+    display: flex;
+    flex-direction: column;
+    background: green;
+    padding: 10px;
+    // margin: 0 5%;
+    width: 90vw;
+    height: 65vh;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    background: yellow;
+    // width: 90%;
+
+    label {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      // background: blue;
+
+      p {
+        width: 22%;
+        margin: 0;
+        padding: 7.5px;
+        height: 36px;
+        background: rgb(226, 225, 225);
+        border-radius: 10px 0 0 10px;
+        border: 1px solid rgb(226, 225, 225);
+        color: rgb(77, 76, 76);
+      }
+
+      input[type='text'] {
+        width: 55%;
+        height: 36px;
+        border: 1px solid rgb(226, 225, 225);
+      }
+
+      input[type='submit'] {
+        width: 10%;
+        height: 36px;
+        background: turquoise;
+        border: 1px solid rgb(226, 225, 225);
+        border-radius: 0 10px 10px 0;
+        color: white;
+        font-weight: 700;
+      }
+    }
+  }
+}
