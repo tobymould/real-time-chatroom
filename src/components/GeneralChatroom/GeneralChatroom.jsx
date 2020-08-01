@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import styles from './Home.module.scss';
+import styles from './GeneralChatroom.module.scss';
 import MessageTile from '../MessageTile';
 
-export default class Home extends Component {
+export default class GeneralChatroom extends Component {
   render() {
+    const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase } = this.props;
     return (
-      <div className={styles.homeWrapper}>
+      <div className={styles.generalChatroomWrapper}>
         <h2>#GENERAL CHATROOM</h2>
         <div className={styles.messageBoard}>
           <MessageTile />

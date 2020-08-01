@@ -4,6 +4,7 @@ import MessageTile from '../MessageTile';
 
 export default class SoftwareChatroom extends Component {
   render() {
+    const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase } = this.props;
     return (
       <div className={styles.homeWrapper}>
         <h2>#SOFTWARE CHATROOM</h2>

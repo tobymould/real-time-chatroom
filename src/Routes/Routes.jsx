@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { Router } from '@reach/router';
 import firebase, { firestore, provider } from '../firebase';
 
-import Home from '../components/Home';
+import GeneralChatroom from '../components/GeneralChatroom';
 import Navbar from '../components/Navbar';
 import SoftwareChatroom from '../components/SoftwareChatroom';
 
 export default class Routes extends Component {
-  state = { user: null, firebaseData: null };
+  state = { user: null, chatroomGeneral: null, chatroomSoftware: null };
 
   componentDidMount() {
     this.getUser();
+    this.getDataFromFirebase();
   }
 
   // AUTHENTICATION METHODS
@@ -43,13 +44,20 @@ export default class Routes extends Component {
   };
 
   // FIRESTORE METHODS - CRUD
-  getDataFromFirebase = () => {
-    firestore
-      .collection('chatrooms')
-      .doc('Toby')
-      .get()
-      .then(snapshot => {})
-      .catch(error => {});
+  getDataFromFirebase = async () => {
+    const collectionGeneral = firestore.collection('general');
+    const snapshotGeneral = await collectionGeneral.get();
+    let dataArray = [];
+    snapshotGeneral.forEach(doc => {
+      const hello = doc.id;
+      dataArray.push({
+        [hello]: doc.data()
+      });
+    });
+
+    console.log(dataArray);
+
+    this.setState({ chatroomGeneral: dataArray });
   };
 
   addDataToFirebase = something => {
@@ -82,15 +90,18 @@ export default class Routes extends Component {
   render() {
     const { user } = this.state;
     const { signIn, signOut, signInOutJsx } = this;
+    const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase } = this;
 
     return (
       <>
         <h1 style={{ textAlign: 'center' }}>Real-Time Chatroom</h1>
         <h3 style={{ textAlign: 'center' }}>Choose a Chatroom:</h3>
         <Navbar signIn={signIn} signOut={signOut} signInOutJsx={signInOutJsx} />
+
         <Router>
-          <Home path="/" />
-          <SoftwareChatroom path="software" />
+          <GeneralChatroom path="/" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} />
+
+          <SoftwareChatroom path="software" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} />
         </Router>
       </>
     );
