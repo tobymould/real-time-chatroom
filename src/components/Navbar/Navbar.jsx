@@ -4,8 +4,10 @@ import { Link } from '@reach/router';
 
 export default class Navbar extends Component {
   render() {
+    const { signIn, signOut, signInOutJsx } = this.props;
     return (
       <nav className={styles.navbarWrapper}>
+        {signInOutJsx()}
         <ul className={styles.navbar}>
           <Link to="/">#general</Link>
           <Link to="software">#software</Link>
