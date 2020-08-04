@@ -7,13 +7,13 @@ export default class Navbar extends Component {
     const { signInOutJsx } = this.props;
     return (
       <nav className={styles.navbarWrapper}>
-        {signInOutJsx()}
         <ul className={styles.navbar}>
           <Link to="app">#general</Link>
           <Link to="app/software">#software</Link>
           <Link to="app/engineering">#engineering</Link>
           <Link to="app/science">#science</Link>
         </ul>
+        {signInOutJsx()}
       </nav>
     );
   }

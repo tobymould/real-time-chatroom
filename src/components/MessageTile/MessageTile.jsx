@@ -10,7 +10,7 @@ export default class MessageTile extends Component {
         <div>
           <p>{name}</p>
           <p>
-            Message: <span> {message}</span>
+            <span> {message}</span>
           </p>
         </div>
       </div>

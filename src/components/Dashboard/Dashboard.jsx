@@ -9,8 +9,8 @@ export default class Dashboard extends Component {
     const { signIn, signOut, signInOutJsx } = this.props;
     return (
       <div className={styles.dashboardWrapper}>
-        <h1 style={{ textAlign: 'center' }}>Real-Time Chatroom</h1>
-        <h3 style={{ textAlign: 'center' }}>Choose a Chatroom:</h3>
+        {/* <h1 style={{ textAlign: 'center' }}>Real-Time Chatroom</h1> */}
+        {/* <h3 style={{ textAlign: 'center' }}>Choose a Chatroom:</h3> */}
         <Navbar signIn={signIn} signOut={signOut} signInOutJsx={signInOutJsx} />
       </div>
     );

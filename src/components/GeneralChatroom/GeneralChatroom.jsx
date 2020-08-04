@@ -13,7 +13,7 @@ export default class GeneralChatroom extends Component {
 
         <form onSubmit={addDataToFirebase}>
           <label>
-            <p>Your Message:</p>
+            {/* <p>Your Message:</p> */}
             <input type="text" placeholder="Your message..." onInput={messageStateToggle} />
             <input type="submit" value="send" />
           </label>

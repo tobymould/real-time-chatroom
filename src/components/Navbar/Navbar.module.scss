@@ -1,36 +1,40 @@
 @import '../../sass/variables';
 
 .navbarWrapper {
-  // background: blue;
   text-align: center;
+  margin-bottom: 20px;
 
-  button {
-    text-decoration: none;
-    color: white;
-    padding: 10px;
-    margin: 10px;
-    background: black;
-    border-radius: 5px;
-    border: none;
-    font-weight: 700;
-    // margin: ;
-  }
+  // button {
+  //   text-decoration: none;
+  //   color: white;
+  //   // padding: 10px;
+  //   // margin: 10px;
+  //   background: black;
+  //   // border-radius: 5px;
+  //   border: none;
+  //   font-weight: 700;
+  //   // margin: ;
+  // }
 
   .navbar {
+    // background: blue;
     display: flex;
     align-items: center;
     justify-content: center;
     list-style: none;
     // background: yellow;
-    margin: 0;
+    margin-bottom: 10px;
+    padding: 10px;
 
     a {
       text-decoration: none;
       color: white;
       padding: 10px;
-      margin: 10px;
+      margin: 5px;
       background: turquoise;
+      font-weight: 700;
       border-radius: 5px;
+      font-size: 0.75rem;
       // background: red;
     }
   }
