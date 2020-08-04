@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Router, Link } from '@reach/router';
 import firebase, { firestore, provider } from '../firebase';
 import PrivateRoutes from '../containers/PrivateRoutes';
+import styles from './Routes.module.scss';
 
 import GeneralChatroom from '../components/GeneralChatroom';
 import Dashboard from '../components/Dashboard';
@@ -9,7 +10,7 @@ import SoftwareChatroom from '../components/SoftwareChatroom';
 import MessageTile from '../components/MessageTile';
 
 export default class Routes extends Component {
-  state = { user: null, messageSubmit: null, message: null, chatroomGeneral: null, chatroomSoftware: null };
+  state = { user: null, messageSubmit: null, message: null, chatroomGeneral: null, chatroomSoftware: null, room: 'generalChatroom' };
 
   componentDidMount() {
     this.getUser();
@@ -49,9 +50,14 @@ export default class Routes extends Component {
     }
   };
 
+  chatroomSetState = theRoomName => {
+    this.setState({ room: theRoomName });
+  };
+
   // FIRESTORE METHODS - CRUD:
   getDataFromFirebase = async () => {
-    const collectionGeneral = firestore.collection('generalChatroom');
+    const { room } = this.state;
+    const collectionGeneral = firestore.collection(room);
     const snapshotGeneral = await collectionGeneral.get();
     let dataArray = [];
     snapshotGeneral.forEach(doc => {
@@ -64,7 +70,7 @@ export default class Routes extends Component {
 
   addDataToFirebase = event => {
     event.preventDefault();
-    const { user, message } = this.state;
+    const { user, message, room } = this.state;
     const instantiateTime = new Date();
     const now = JSON.stringify(instantiateTime).slice(0, -6).slice(1).split('T').join('_');
     const createdAt = firebase.firestore.Timestamp.fromDate(instantiateTime);
@@ -76,7 +82,7 @@ export default class Routes extends Component {
     console.log(submission);
 
     firestore
-      .collection('generalChatroom')
+      .collection(room)
       .doc(now + userEmail)
       .set(submission)
       .then(snapshot => {})
@@ -85,23 +91,23 @@ export default class Routes extends Component {
     this.getDataFromFirebase();
   };
 
-  updateDataOnFirebase = something => {
-    firestore
-      .collection('chatrooms')
-      .doc('Toby')
-      .update(something)
-      .then(snapshot => {})
-      .catch(error => {});
-  };
+  // updateDataOnFirebase = something => {
+  //   firestore
+  //     .collection('chatrooms')
+  //     .doc('Toby')
+  //     .update(something)
+  //     .then(snapshot => {})
+  //     .catch(error => {});
+  // };
 
-  deleteDataFromFirebase = something => {
-    firestore
-      .collection('chatrooms')
-      .doc('Toby')
-      .delete(something)
-      .then(snapshot => {})
-      .catch(error => {});
-  };
+  // deleteDataFromFirebase = something => {
+  //   firestore
+  //     .collection('chatrooms')
+  //     .doc('Toby')
+  //     .delete(something)
+  //     .then(snapshot => {})
+  //     .catch(error => {});
+  // };
 
   // OTHER METHODS:
   inputMessageTiles = () => {
@@ -136,23 +142,23 @@ export default class Routes extends Component {
   };
 
   render() {
-    const { user, message } = this.state;
+    const { user, message, room } = this.state;
     const { signIn, signOut, signInOutJsx } = this;
     const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase } = this;
-    const { inputMessageTiles, messageStateToggle } = this;
+    const { inputMessageTiles, messageStateToggle, chatroomSetState } = this;
 
     return (
-      <>
-        <Dashboard signIn={signIn} signOut={signOut} signInOutJsx={signInOutJsx} />
-
+      <section className={styles.routesWrapper}>
         <Router>
           <PrivateRoutes path="app" user={user}>
-            {user ? <GeneralChatroom path="/" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} message={message} messageStateToggle={messageStateToggle} /> : null}
+            {user ? <GeneralChatroom path="/" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} message={message} messageStateToggle={messageStateToggle} chatroomSetState={chatroomSetState} room={room} /> : null}
 
-            <SoftwareChatroom path="software" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} />
+            <SoftwareChatroom path="software" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} chatroomSetState={chatroomSetState} room={room} />
           </PrivateRoutes>
         </Router>
-      </>
+
+        <Dashboard signIn={signIn} signOut={signOut} signInOutJsx={signInOutJsx} />
+      </section>
     );
   }
 }

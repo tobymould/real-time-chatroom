@@ -3,3 +3,26 @@
   margin: 0;
   padding: 0;
 }
+
+//------------------------------------//
+//--------------VARIABLES--------------//
+//------------------------------------//
+// Screen-sizes:
+$ipad-min-width: 670px;
+$ipad-max-width: 769px;
+$ipad-pro-min-width: 770px;
+$ipad-pro-max-width: 1200px;
+$desktop-min-width: 1201px;
+
+// Device dimensions
+$iphone6-width-landscape: 667px;
+$iphone6-height-landscape: 375px;
+
+$iphoneX-width-landscape: 812px;
+$iphoneX-height-landscape: 375px;
+
+$ipad-width-landscape: 1024px;
+$ipad-height-landscape: 768px;
+
+$ipad-pro-width-landscape: 1366px;
+$ipad-pro-height-landscape: 1024px;

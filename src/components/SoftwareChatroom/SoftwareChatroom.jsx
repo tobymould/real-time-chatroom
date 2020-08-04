@@ -4,27 +4,22 @@ import MessageTile from '../MessageTile';
 
 export default class SoftwareChatroom extends Component {
   render() {
-    const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase } = this.props;
+    const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase, inputMessageTiles } = this.props;
+    const { messageStateToggle, chatroomSetState, room } = this.props;
+
     return (
-      <div className={styles.homeWrapper}>
-        <h2>#SOFTWARE CHATROOM</h2>
-        <div className={styles.messageBoard}>
-          <MessageTile />
-          <MessageTile />
-          <MessageTile />
-        </div>
-        <form>
+      <div className={styles.softwareChatroomWrapper}>
+        <h2 className={styles.softwareChatroom}>#SOFTWARE CHATROOM</h2>
+        <div className={styles.messageBoard}>{inputMessageTiles()}</div>
+
+        <form onSubmit={addDataToFirebase}>
           <label>
-            <p>Your Message:</p>
-            <input type="text" placeholder="Your message..." />
+            {/* <p>Your Message:</p> */}
+            <input type="text" placeholder="Your message..." onInput={messageStateToggle} />
             <input type="submit" value="send" />
           </label>
-          <label>
-            <p>Update Display Name:</p>
-            <input type="text" placeholder="Update display name..." />
-            <input type="submit" value="update" />
-          </label>
         </form>
+        {room !== 'softwareChatroom' ? chatroomSetState('softwareChatroom') : null}
       </div>
     );
   }

@@ -1,10 +1,12 @@
 @import '../../sass/variables';
 
-.homeWrapper {
+.softwareChatroomWrapper {
   margin: 0 5vw;
+  // background: yellow;
 
   h2 {
     text-align: center;
+    margin-bottom: 10px;
     // color:
   }
 
@@ -12,11 +14,12 @@
     display: flex;
     flex-direction: column;
     // background: green;
-    padding: 10px;
+    padding: 15px;
     // margin: 0 5%;
     border-radius: 20px 20px 0 0;
     width: 90vw;
     height: 65vh;
+    overflow-y: scroll;
     box-shadow: 5px 5px 49px -15px rgba(0, 0, 0, 0.75);
   }
 
@@ -25,6 +28,8 @@
     flex-direction: column;
     background: #999;
     border-radius: 0 0 20px 20px;
+    // width: 100%;
+    // background: blue;
 
     // width: 90%;
     label {
@@ -36,7 +41,7 @@
       // background: blue;
 
       p {
-        width: 22%;
+        // width: 22%;
         margin: 0;
         padding: 7.5px;
         height: 36px;
@@ -44,16 +49,19 @@
         border-radius: 10px 0 0 10px;
         border: 1px solid rgb(226, 225, 225);
         color: rgb(77, 76, 76);
+        font-size: 0.75rem;
       }
 
       input[type='text'] {
-        width: 55%;
+        min-width: 80%;
         height: 36px;
         border: 1px solid rgb(226, 225, 225);
+        border-radius: 10px 0 0 10px;
+        padding: 10px;
       }
 
       input[type='submit'] {
-        width: 10%;
+        min-width: 20%;
         height: 36px;
         background: turquoise;
         border: 1px solid rgb(226, 225, 225);

@@ -5,7 +5,8 @@ import MessageTile from '../MessageTile';
 export default class GeneralChatroom extends Component {
   render() {
     const { getDataFromFirebase, addDataToFirebase, updateDataOnFirebase, deleteDataFromFirebase, inputMessageTiles } = this.props;
-    const { messageStateToggle } = this.props;
+    const { messageStateToggle, chatroomSetState, room } = this.props;
+
     return (
       <div className={styles.generalChatroomWrapper}>
         <h2>#GENERAL CHATROOM</h2>
@@ -18,6 +19,8 @@ export default class GeneralChatroom extends Component {
             <input type="submit" value="send" />
           </label>
         </form>
+
+        {room !== 'generalChatroom' ? chatroomSetState('generalChatroom') : null}
       </div>
     );
   }

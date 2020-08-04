@@ -1,0 +1,46 @@
+@import '../sass/variables';
+
+.routesWrapper {
+  // background: blue;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // --------------------------------------------------------------------------
+
+  // LANDSCAPE FORMATS
+  @media (orientation: landscape) {
+    @media (max-width: $iphone6-width-landscape) {
+      height: auto;
+    }
+
+    @media (max-width: $iphoneX-width-landscape) {
+    }
+
+    @media (min-width: 813px) and (max-width: $ipad-width-landscape) {
+    }
+
+    @media (min-width: 1025px) and (max-width: $ipad-pro-width-landscape) {
+    }
+
+    @media (min-width: $desktop-min-width) {
+    }
+  }
+
+  // PORTRAIT FORMATS
+  @media (orientation: portrait) {
+    // Ipad
+    @media (min-width: $ipad-min-width) and (max-width: $ipad-max-width) {
+    }
+  }
+
+  // Ipad Pro
+  @media (min-width: $ipad-pro-min-width) and (max-width: $ipad-pro-max-width) {
+  }
+
+  // Desktop
+  @media (min-width: $desktop-min-width) {
+  }
+}
