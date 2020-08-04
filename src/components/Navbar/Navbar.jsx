@@ -4,15 +4,15 @@ import { Link } from '@reach/router';
 
 export default class Navbar extends Component {
   render() {
-    const { signIn, signOut, signInOutJsx } = this.props;
+    const { signInOutJsx } = this.props;
     return (
       <nav className={styles.navbarWrapper}>
         {signInOutJsx()}
         <ul className={styles.navbar}>
-          <Link to="/">#general</Link>
-          <Link to="software">#software</Link>
-          <Link to="engineering">#engineering</Link>
-          <Link to="science">#science</Link>
+          <Link to="app">#general</Link>
+          <Link to="app/software">#software</Link>
+          <Link to="app/engineering">#engineering</Link>
+          <Link to="app/science">#science</Link>
         </ul>
       </nav>
     );

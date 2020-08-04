@@ -1,0 +1,37 @@
+@import '../../sass/variables';
+
+.dashboardWrapper {
+  // background: blue;
+  text-align: center;
+
+  button {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    background: black;
+    border-radius: 5px;
+    border: none;
+    font-weight: 700;
+    // margin: ;
+  }
+
+  .dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    // background: yellow;
+    margin: 0;
+
+    a {
+      text-decoration: none;
+      color: white;
+      padding: 10px;
+      margin: 10px;
+      background: turquoise;
+      border-radius: 5px;
+      // background: red;
+    }
+  }
+}

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Router } from '@reach/router';
+import { Router, Link } from '@reach/router';
 import firebase, { firestore, provider } from '../firebase';
+import PrivateRoutes from '../containers/PrivateRoutes';
 
 import GeneralChatroom from '../components/GeneralChatroom';
-import Navbar from '../components/Navbar';
+import Dashboard from '../components/Dashboard';
 import SoftwareChatroom from '../components/SoftwareChatroom';
 import MessageTile from '../components/MessageTile';
 
@@ -40,7 +41,11 @@ export default class Routes extends Component {
     if (user) {
       return <button onClick={signOut}>Signout</button>;
     } else {
-      return <button onClick={signIn}>Signin</button>;
+      return (
+        <Link to="app" onClick={signIn}>
+          Signin
+        </Link>
+      );
     }
   };
 
@@ -65,7 +70,9 @@ export default class Routes extends Component {
     const createdAt = firebase.firestore.Timestamp.fromDate(instantiateTime);
     const userEmail = user.email;
     const userName = user.displayName;
-    const submission = { userEmail: userEmail, userName: userName, message: message, createdAt: createdAt };
+    const displayPicture = user.photoURL ? user.photoURL : 'https://source.unsplash.com/1600x900/?selfie';
+
+    const submission = { userEmail: userEmail, userName: userName, message: message, displayPicture: displayPicture, createdAt: createdAt };
     console.log(submission);
 
     firestore
@@ -105,10 +112,19 @@ export default class Routes extends Component {
       return chatroomGeneral.map((tileInfo, index) => {
         const name = tileInfo[1].userName;
         const message = tileInfo[1].message;
+        let displayPicture;
+
+        if (tileInfo[1].displayPicture) {
+          displayPicture = tileInfo[1].displayPicture;
+        } else if (!tileInfo) {
+          displayPicture = user.photoURL;
+        } else {
+          displayPicture = 'https://source.unsplash.com/1600x900/?selfie';
+        }
 
         // const timeStamp = tileInfo[1].created_at.seconds / 60 / 60 / 24 / 7 / 12 / 10;
 
-        return <MessageTile name={name} message={message} photo={user ? user.photoURL : null} key={index} />;
+        return <MessageTile name={name} message={message} photo={displayPicture} key={index} />;
       });
     } else {
       return null;
@@ -127,14 +143,14 @@ export default class Routes extends Component {
 
     return (
       <>
-        <h1 style={{ textAlign: 'center' }}>Real-Time Chatroom</h1>
-        <h3 style={{ textAlign: 'center' }}>Choose a Chatroom:</h3>
-        <Navbar signIn={signIn} signOut={signOut} signInOutJsx={signInOutJsx} />
+        <Dashboard signIn={signIn} signOut={signOut} signInOutJsx={signInOutJsx} />
 
         <Router>
-          <GeneralChatroom path="/" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} message={message} messageStateToggle={messageStateToggle} />
+          <PrivateRoutes path="app" user={user}>
+            {user ? <GeneralChatroom path="/" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} message={message} messageStateToggle={messageStateToggle} /> : null}
 
-          <SoftwareChatroom path="software" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} />
+            <SoftwareChatroom path="software" getDataFromFirebase={getDataFromFirebase} addDataToFirebase={addDataToFirebase} updateDataOnFirebase={updateDataOnFirebase} deleteDataFromFirebase={deleteDataFromFirebase} inputMessageTiles={inputMessageTiles} />
+          </PrivateRoutes>
         </Router>
       </>
     );
