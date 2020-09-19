@@ -1,5 +1,5 @@
 
-# Chatroom ReadMe :calling: :shipit:
+# Chatroom ReadMe :calling: :nerd_face:
 > React Firebase Website enabling real-time communication between users on a public comment board.
 
 ## :satellite: Summary :satellite:
@@ -20,6 +20,6 @@ Visit my [portfolio website](https://tobymould.com/) and select the 'Real-Time C
 
 ### To Try Yourself
 1. Visit the [chatroom website](https://realtime-chatroom-ea4d6.web.app/)
-2. Log in via your google account 
+2. Log in via your google account :shipit:
 3. Add a message entry to say 'hi'! :wave:
 4. Log out 
