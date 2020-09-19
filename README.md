@@ -15,10 +15,10 @@ __React.js | Sass | CSS3 | HTML5 | Firebase__
 4. __Responsive Styles__ - Use of modern CSS practices using Sass preprocessor :nail_care: to make a nicely styled user interface.
 
 ## How to use
-### Watch a demo:
+### Watch a demo :movie_camera:
 Visit my [portfolio website](https://tobymould.com/) and select the 'Real-Time Chatroom' project button :black_square_button: for a visual 30 second demonstration.
 
-### To Try Yourself
+### Try for yourself :raised_hands:
 1. Visit the [chatroom website](https://realtime-chatroom-ea4d6.web.app/)
 2. Log in via your google account :shipit:
 3. Add a message entry to say 'hi'! :wave:
