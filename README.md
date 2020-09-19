@@ -5,7 +5,7 @@
 ## :satellite: Summary :satellite:
    - __Status:__ COMPLETE :trophy:
 
-## :hammer: Languages/Tools :hammer::
+## :hammer: Languages/Tools :hammer:
 __React.js | Sass | CSS3 | HTML5 | Firebase__
 
 ## :microscope: Notable Features :microscope:
