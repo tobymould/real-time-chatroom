@@ -1,5 +1,5 @@
 
-# Chatroom ReadMe :calling: :nerd_face:
+# Chatroom ReadMe :calling: :shipit:
 > React Firebase Website enabling real-time communication between users on a public comment board.
 
 ## :satellite: Summary :satellite:
