@@ -16,7 +16,7 @@ __React.js | Sass | CSS3 | HTML5 | Firebase__
 
 ## :chart_with_upwards_trend: How to Use :chart_with_upwards_trend:
 ### Watch a demo :movie_camera:
-Visit my [portfolio website](https://tobymould.com/) and select the 'Real-Time Chatroom' project button :black_square_button: for a visual 30 second demonstration.
+Visit my [portfolio website](https://tobymould.com/) and select the __'Real-Time Chatroom'__ project button :black_square_button: for a visual 30 second demonstration.
 
 ### Try for yourself :raised_hands:
 1. Visit the [chatroom website](https://realtime-chatroom-ea4d6.web.app/)
