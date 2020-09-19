@@ -13,3 +13,6 @@ __React.js | Sass | CSS3 | HTML5 | Firebase__
 2. __Authentication__ - Private routing :ticket: that requires Authentication :cop: to access the content. 
 3. __Authorisation__ - User-specific messaging :mailbox_with_mail: utilising their own metadata to identify themselves :man: on the chatroom.
 4. __Responsive Styles__ - Use of modern CSS practices using Sass preprocessor :nail_care: to make a nicely styled user interface.
+
+## How to use
+https://realtime-chatroom-ea4d6.web.app/
