@@ -19,7 +19,7 @@ __React.js | Sass | CSS3 | HTML5 | Firebase__
 Visit my [portfolio website](https://tobymould.com/) and select the 'Real-Time Chatroom' project button for a visual 30 second demonstration.
 
 ### To Try Yourself
-a. Visit the [chatroom website](https://realtime-chatroom-ea4d6.web.app/)
-b. Log in via your google account
-c. Add a message entry to say Hi!
-d. log out 
+1. Visit the [chatroom website](https://realtime-chatroom-ea4d6.web.app/)
+2. Log in via your google account
+3. Add a message entry to say Hi!
+4. log out 
